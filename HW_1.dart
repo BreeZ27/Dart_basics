@@ -69,11 +69,26 @@ binConv(int a, bool back){
   return res;
 }
 
+ // Принимает строку слов, разделённых пробелами. Задача — найти в данной строке числа и вернуть коллекцию num этих чисел.
+numFinder(String a){
+
+  List<num> numbers = [];
+  for (var word in a.replaceAll(',', 'replace').replaceAll('.', 'replace').split(' ')){
+    if (double.tryParse(word) != null){
+      numbers.add(double.parse(word));}
+  }
+  print(numbers);
+}
+
+
 
 
 void main() {
+
+  String text = 'Phasellus laoreet 2 tincidunt justo 1. Fusce suscipit 15 arcu dui 111, eu commodo urna interdum2 sed. Pellentesque eget 1 urna in 1 sapien aliquam porttitor.'*3;
+
   // print(to_simple(126));
   // print(binConv(12, false));
   // print(binConv(110, true));
-
+  numFinder(text);
 }
