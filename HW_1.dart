@@ -1,9 +1,10 @@
+// Вычисление НОК
 int nok (int a, int b){
   var c = 1;
   while ((c%a + c%b) != 0){c += 1;}
   return c;}
 
-
+// Вычисление НОД
 int nod (int a, int b){
   var c;
   if (a >= b){c = b;}
@@ -12,6 +13,7 @@ int nod (int a, int b){
   return c;
 }
 
+// Конвертер чисел из десятичного вида в двоичный и обратно. Принимает число для конвертации и bool, определяющий направление конвертации (true - из Decimal ещ binary). 
 binConv(int a, bool back){
   List<int> bin = [];
   var b = a;
@@ -30,7 +32,6 @@ binConv(int a, bool back){
   else{
     for (i=b.toString().length-1; i==0; i--){
       subRes = 1;
-//       print(subRes);
       for (k=i; k==1; k--){subRes *= 2;}
       res += subRes;
       print(res);
