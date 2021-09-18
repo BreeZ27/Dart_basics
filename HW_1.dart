@@ -77,7 +77,20 @@ numFinder(String a){
     if (double.tryParse(word) != null){
       numbers.add(double.parse(word));}
   }
-  print(numbers);
+  return numbers;
+}
+
+// Возвращает Map. Данный Map должен соотносить слово и количество его вхождений в данную коллекцию.
+wordsCounter(List a){
+  Map counter = {};
+
+  for (var word in a){
+    if (word != ''){
+      if (counter.containsKey(word) == false){counter['$word'] = 1;}
+      else{counter['$word'] += 1;}
+    }
+  }
+  return counter;
 }
 
 
@@ -85,10 +98,13 @@ numFinder(String a){
 
 void main() {
 
-  String text = 'Phasellus laoreet 2 tincidunt justo 1. Fusce suscipit 15 arcu dui 111, eu commodo urna interdum2 sed. Pellentesque eget 1 urna in 1 sapien aliquam porttitor.'*3;
+  String text = 'Phasellus laoreet 2 tincidunt justo 1. Fusce suscipit 15 arcu dui 111, eu commodo urna interdum 2 sed. Pellentesque eget 1 urna in 1 sapien aliquam porttitor. '*3;
+  List parsedText = text.replaceAll(',', '').replaceAll('.', '').split(' ');
 
   // print(to_simple(126));
   // print(binConv(12, false));
   // print(binConv(110, true));
-  numFinder(text);
+  // print(numFinder(text));
+  print(wordsCounter(parsedText));
+  
 }
