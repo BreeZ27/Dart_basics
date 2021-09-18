@@ -93,18 +93,33 @@ wordsCounter(List a){
   return counter;
 }
 
-
+// Возвращант цифры без повторений, которые встречаются в данной строке
+numFinder2(String a){
+  Map numMap = {'zero': 0,'one': 1, 'two': 2,'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine':9};
+  List res = [];
+  for (var word in a.replaceAll(',', '').replaceAll('.', '').split(' ')){
+    if (word != ''){
+      if (numMap.containsKey(word.toLowerCase()) == true){
+        if (res.contains(numMap[word]) == false){
+          res.add(numMap[word]);
+        }
+      }
+    }
+  }
+  return res;
+}
 
 
 void main() {
 
   String text = 'Phasellus laoreet 2 tincidunt justo 1. Fusce suscipit 15 arcu dui 111, eu commodo urna interdum 2 sed. Pellentesque eget 1 urna in 1 sapien aliquam porttitor. '*3;
   List parsedText = text.replaceAll(',', '').replaceAll('.', '').split(' ');
+  String mycollection = 'one, two, three, cat, dog, four, four';
 
   // print(to_simple(126));
   // print(binConv(12, false));
   // print(binConv(110, true));
   // print(numFinder(text));
-  print(wordsCounter(parsedText));
-  
+  // print(wordsCounter(parsedText));
+  // print(numFinder2(mycollection));
 }
