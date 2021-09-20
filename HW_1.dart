@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 // Вычисление НОК
 int nok (int a, int b){
   var c = 1;
@@ -96,17 +98,47 @@ wordsCounter(List a){
 // Возвращант цифры без повторений, которые встречаются в данной строке
 numFinder2(String a){
   Map numMap = {'zero': 0,'one': 1, 'two': 2,'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine':9};
-  List res = [];
+  Set res = {};
   for (var word in a.replaceAll(',', '').replaceAll('.', '').split(' ')){
     if (word != ''){
       if (numMap.containsKey(word.toLowerCase()) == true){
-        if (res.contains(numMap[word]) == false){
-          res.add(numMap[word]);
-        }
+        res.add(numMap[word]);
       }
     }
   }
   return res;
+}
+
+class Point{
+  late double x;
+  late double y;
+  late double z;
+
+  initialize(double newX, double newY, double newZ){
+    x = newX; y = newY; z=newZ;
+  }
+ 
+  position(){
+    print('X:$x, Y:$y, Z:$z');
+  }
+ 
+  distTo(anotherPoint){
+    var difX = (x - anotherPoint.x).abs();
+    var difY = (y - anotherPoint.y).abs();
+    var difZ = (z - anotherPoint.z).abs();
+    var difAbs = math.sqrt(difX*difX + difY*difY + difZ*difZ);
+    print('Axis X: $difX, Axis Y: $difY, Axis Z: $difZ, AbsDif = $difAbs');
+    return difAbs;
+  }
+
+  trlSqr(anothPoint1, anothPoint2){
+    var a = distTo(anothPoint1);
+    var b = distTo(anothPoint2);
+    var c = anothPoint2.distTo(anothPoint1);
+    var p = 0.5*(a + b +c);
+    var s = math.sqrt(p*(p-a)*(p-b)*(p-c));
+    return s;
+  }
 }
 
 
@@ -122,4 +154,21 @@ void main() {
   // print(numFinder(text));
   // print(wordsCounter(parsedText));
   // print(numFinder2(mycollection));
+
+  final point1 = Point();
+  final point2 = Point();
+  final point3 = Point();
+
+  point1.initialize(1, -1, 1);
+  point1.position();
+
+  point2.initialize(5, 6, 7);
+  point2.position();
+
+  point3.initialize(2, 2, 2);
+  point3.position();
+ 
+  // point1.distTo(point2);
+  print(point1.trlSqr(point3, point2));
+
 }
