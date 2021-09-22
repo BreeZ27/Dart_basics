@@ -109,14 +109,22 @@ numFinder2(String a){
   return res;
 }
 
+// Класс создания точек в трехмерном декартовом пространстве.
 class Point{
-  late double x;
-  late double y;
-  late double z;
+  final double x;
+  final double y;
+  final double z;
 
-  initialize(double newX, double newY, double newZ){
-    x = newX; y = newY; z=newZ;
+  Point(this.x, this.y, this.z);
+  Point.zero() : x=0, y=0, z=0;
+
+  factory Point.foreverFirst(){
+    return Point(1,1,1);
   }
+
+  // initialize(double newX, double newY, double newZ){
+    // x = newX; y = newY; z=newZ;
+  // }
  
   position(){
     print('X:$x, Y:$y, Z:$z');
@@ -139,7 +147,46 @@ class Point{
     var s = math.sqrt(p*(p-a)*(p-b)*(p-c));
     return s;
   }
+
+
 }
+
+// Вычисление корня стемени n из числа a
+extension exp on num{
+  exp(int n){
+    int i;
+    int iterator = 0;
+
+    if (n < 1){return throw Exception("Невозможно вычислить");}
+    if (n == 1){return this;}
+    if (n > 1){
+      num xZeroN;
+      num xNext = this;
+      num xZero = this/n;
+
+      while (xZero.toStringAsFixed(8) != xNext.toStringAsFixed(8)){
+        xZero = xNext;
+        xZeroN = xZero;
+
+        for (i=1; i<(n-1); i++){xZeroN *= xZero;}
+
+        xNext = 1/n*((n-1)*xZero + this/(xZeroN));
+        iterator += 1;
+
+        if (iterator > 5000){break;}
+      }
+      print('Было сделано $iterator итераций.');
+      return xZero;
+      }
+    }
+  }
+
+class user{
+  String email;
+  user(this.email);
+
+}
+
 
 
 void main() {
@@ -155,20 +202,32 @@ void main() {
   // print(wordsCounter(parsedText));
   // print(numFinder2(mycollection));
 
-  final point1 = Point();
-  final point2 = Point();
-  final point3 = Point();
+  final point1 = Point(1,-1,1);
+  final point2 = Point(5,6,7);
+  final point3 = Point(2,2,2);
+  final point4 = Point.zero();
+  final point5 = Point.foreverFirst();
 
-  point1.initialize(1, -1, 1);
+  // point1.initialize(1, -1, 1); // Пробовал работать с инициализацией
   point1.position();
 
-  point2.initialize(5, 6, 7);
+  // point2.initialize(5, 6, 7); // Пробовал работать с инициализацией
   point2.position();
 
-  point3.initialize(2, 2, 2);
+  // point3.initialize(2, 2, 2); // Пробовал работать с инициализацией
   point3.position();
+  point4.position();
+  point5.position();
  
-  // point1.distTo(point2);
+  point1.distTo(point2);
   print(point1.trlSqr(point3, point2));
+
+  // print(exponentiation(5, 5));
+  // print(exponentiation(5, 0)); // Вывовет исключение
+
+  final user1 = user('lol@korvalola.net');
+
+  num a = 15;
+  a.exp(3);
 
 }
