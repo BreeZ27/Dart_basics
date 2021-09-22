@@ -152,7 +152,7 @@ class Point{
 }
 
 // Вычисление корня стемени n из числа a
-extension exp on num{
+extension expCalc on num{
   exp(int n){
     int i;
     int iterator = 0;
@@ -175,11 +175,12 @@ extension exp on num{
 
         if (iterator > 5000){break;}
       }
-      print('Было сделано $iterator итераций.');
+      // print('Было сделано $iterator итераций.');
       return xZero;
-      }
+
     }
   }
+}
 
 class user{
   String email;
@@ -222,12 +223,12 @@ void main() {
   point1.distTo(point2);
   print(point1.trlSqr(point3, point2));
 
-  // print(exponentiation(5, 5));
-  // print(exponentiation(5, 0)); // Вывовет исключение
-
   final user1 = user('lol@korvalola.net');
 
   num a = 15;
-  a.exp(3);
+  print(a.exp(3));
+  print(a.exp(1));
+  // print(a.exp(0));  // Вывовет исключение
+
 
 }
