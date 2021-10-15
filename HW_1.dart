@@ -182,12 +182,44 @@ extension expCalc on num{
   }
 }
 
-class user{
+class User{
   String email;
-  user(this.email);
+  User(this.email);
 
+  void emailOut() {
+    print(this.email);
+  }
 }
 
+class AdminUser extends User with MailSystem{
+  AdminUser(String email) : super (email);
+  }
+
+mixin MailSystem on User{
+  void getMailSystem() {print(email.split('@')[1]);}
+}
+
+class GeneralUser extends User{
+    GeneralUser(String email) : super (email);
+}
+
+class UserManager<T extends User>{
+  List userList = [];
+
+  void addUser(User){userList.add(User);}
+  void delUser(User){userList.remove(User);}
+  void show(){
+    int i;
+    for (i=0; i<userList.length; i++){
+      if (userList[i].runtimeType == GeneralUser){
+        print(userList[i].emailOut());
+      }
+      else {
+        print(userList[i].getMailSystem());
+      }
+    }
+  }
+}
 
 
 void main() {
@@ -223,12 +255,34 @@ void main() {
   point1.distTo(point2);
   print(point1.trlSqr(point3, point2));
 
-  final user1 = user('lol@korvalola.net');
+  User user1 = GeneralUser('lol@korvalola.net');
+  User user2 = GeneralUser('luk@otca.net');
+  User user3 = GeneralUser('chubaka@thebig.com');
+  User user4 = GeneralUser('cat@sleep.net');
+  user1.emailOut();
 
-  num a = 15;
-  print(a.exp(3));
-  print(a.exp(1));
+  AdminUser admin = AdminUser('admin@system.true');
+  admin.email = 'admin@system.true';
+  admin.getMailSystem();
+
+
+
+
+  UserManager manager = UserManager();
+  manager.addUser(user1);
+  manager.addUser(user2);
+  manager.addUser(user3);
+  manager.addUser(user4);
+  manager.addUser(admin);
+
+  manager.show();
+
+
+  // num a = 15;
+  // print(a.exp(3));
+  // print(a.exp(1));
   // print(a.exp(0));  // Вывовет исключение
 
 
+  
 }
